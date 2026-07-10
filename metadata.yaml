@@ -1,4 +1,4 @@
-name: astrbot_plugin_many_apis
+name: astrbot_plugin_uapi
 display_name: Many APIs (UAPI)
 short_desc: 封装 uapis.cn 100+ 免费 API，支持指令调用和 LLM Tool 调用
 desc: |

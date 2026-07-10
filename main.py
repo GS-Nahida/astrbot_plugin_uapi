@@ -1,5 +1,5 @@
 """
-astrbot_plugin_many_apis - UAPI 百API插件
+astrbot_plugin_uapi - UAPI 百API插件
 封装 uapis.cn 100+ 免费 API，支持指令调用和 LLM Tool 调用
 
 指令格式:
@@ -28,7 +28,7 @@ from astrbot.api.message_components import Plain, File as CompFile
 from .uapi_client import UAPIClient
 from .api_registry import API_DEFINITIONS, API_MAP
 
-class ManyAPIsPlugin(Star):
+class UAPIPlugin(Star):
     """UAPI 百API插件 - 封装 100+ 免费 API"""
 
     def __init__(self, context: Context, config: AstrBotConfig):
@@ -71,11 +71,11 @@ class ManyAPIsPlugin(Star):
             for name in tool_names:
                 api = API_MAP.get(name)
                 if not api:
-                    logger.warning(f"[ManyAPIs] API '{name}' not found in registry, skipped.")
+                    logger.warning(f"[UAPI] API '{name}' not found in registry, skipped.")
                     continue
                 if self._has_path_params(api):
                     logger.warning(
-                        f"[ManyAPIs] API '{name}' has path parameters ({{param}}), "
+                        f"[UAPI] API '{name}' has path parameters ({{param}}), "
                         "cannot register as LLM tool, skipped."
                     )
                     skipped += 1
@@ -85,7 +85,7 @@ class ManyAPIsPlugin(Star):
                     self.context.add_llm_tools(tool_instance)
                     self._tool_instances.append(tool_instance)
                     registered += 1
-                    logger.debug(f"[ManyAPIs] Registered LLM tool: {name}")
+                    logger.debug(f"[UAPI] Registered LLM tool: {name}")
         else:
             # 全量模式：注册所有不含路径参数的 API
             for name, api in API_MAP.items():
@@ -97,10 +97,10 @@ class ManyAPIsPlugin(Star):
                     self.context.add_llm_tools(tool_instance)
                     self._tool_instances.append(tool_instance)
                     registered += 1
-                    logger.debug(f"[ManyAPIs] Registered LLM tool: {name}")
+                    logger.debug(f"[UAPI] Registered LLM tool: {name}")
 
         logger.info(
-            f"[ManyAPIs] Registered {registered} LLM tools"
+            f"[UAPI] Registered {registered} LLM tools"
             + (f" (skipped {skipped} with path params)" if skipped else "")
         )
 
@@ -337,7 +337,7 @@ class ManyAPIsPlugin(Star):
 
         method = api["method"]
         path = api["path"]
-        logger.info(f"[ManyAPIs] Calling {method} {path} query={query_args} body={body_args}")
+        logger.info(f"[UAPI] Calling {method} {path} query={query_args} body={body_args}")
 
         try:
             result = await self.client.call(
@@ -347,7 +347,7 @@ class ManyAPIsPlugin(Star):
                 json_body=body_args if body_args else None,
             )
         except Exception as e:
-            logger.error(f"[ManyAPIs] Error calling {path}: {e}")
+            logger.error(f"[UAPI] Error calling {path}: {e}")
             return event.plain_result(f"API 调用异常: {str(e)}")
 
         if not result.get("success"):
@@ -411,7 +411,7 @@ class ManyAPIsPlugin(Star):
                 ]
                 return event.chain_result(chain)
             except Exception as e:
-                logger.error(f"[ManyAPIs] Failed to save audio: {e}")
+                logger.error(f"[UAPI] Failed to save audio: {e}")
                 return event.plain_result(f"音频获取成功，但发送失败: {str(e)}")
 
         if is_image:
@@ -438,7 +438,7 @@ class ManyAPIsPlugin(Star):
 
                 return event.image_result(tmp_path)
             except Exception as e:
-                logger.error(f"[ManyAPIs] Failed to save image: {e}")
+                logger.error(f"[UAPI] Failed to save image: {e}")
                 return event.plain_result(f"图片获取成功，但发送失败: {str(e)}")
 
         return event.plain_result(

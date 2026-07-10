@@ -1,11 +1,11 @@
-# astrbot_plugin_many_apis
+# astrbot_plugin_uapi
 
 📡 封装 100+ 免费 API 的 AstrBot 插件，支持**指令调用**和 **LLM Tool 自动调用**两种方式。
 
 ## ✨ 功能特性
 
 - 🔌 **100+ API 封装**：涵盖天气、IP 定位、翻译、热榜、二维码、OCR、Minecraft、B站、GitHub、文本处理、图片处理等
-- 🎯 **指令调用**：通过 `/uapi` 指令直接调用任意 API，支持**简化位置参数**和**传统 key=value** 两种模式
+- 🎯 **指令调用**：通过 `/uapi` 指令直接调用任意 API
 - 🤖 **LLM Tool**：将常用 API 注册为大模型可调用的 Function Tool，AstrBot 对话中可自动触发
 - 🖼️ **媒体支持**：API 返回的图片自动发送为图片消息，音频自动以文件形式发送
 - ⚙️ **可视化配置**：在 WebUI 中配置 API Key、启用/禁用 Tool、自定义 Tool 白名单
@@ -15,13 +15,13 @@
 
 ### 方式一：AstrBot WebUI 插件市场
 
-在 WebUI 的插件管理页面搜索 `astrbot_plugin_many_apis` 并安装。
+在 WebUI 的插件管理页面搜索 `astrbot_plugin_uapi` 并安装。
 
 ### 方式二：手动安装
 
 ```bash
 cd AstrBot/data/plugins
-git clone <插件仓库地址> astrbot_plugin_many_apis
+git clone https://github.com/GS-Nahida/astrbot_plugin_uapi
 ```
 
 安装依赖：
@@ -389,7 +389,7 @@ misc.weather,network.ipinfo,translate.text,image.qrcode,misc.hotboard
 ### 项目结构
 
 ```
-astrbot_plugin_many_apis/
+astrbot_plugin_uapi/
 ├── metadata.yaml          # 插件元数据
 ├── _conf_schema.json      # 配置 Schema
 ├── requirements.txt       # 依赖
