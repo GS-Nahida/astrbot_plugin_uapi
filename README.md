@@ -1,3 +1,6 @@
+![Moe Counter](https://count.getloli.com/@astrbot_plugin_uapi?theme=minecraft)
+
+
 # astrbot_plugin_uapi
 
 📡 封装 100+ 免费 API 的 AstrBot 插件，支持**指令调用**和 **LLM Tool 自动调用**两种方式。
