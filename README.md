@@ -418,7 +418,7 @@ python tools/generate_registry.py
 
 ## 📄 许可
 
-AGPL-3.0 License
+AGPL 3.0 License
 
 ## 🔗 相关链接
 
