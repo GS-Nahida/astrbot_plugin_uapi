@@ -1,3 +1,7 @@
+# Debug / scratch files
+_debug*.txt
+_debug*.block
+
 # Bytecode
 __pycache__/
 *.py[cod]

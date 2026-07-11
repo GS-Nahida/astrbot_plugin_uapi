@@ -23,7 +23,7 @@ from typing import Dict, List, Any
 from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star
 from astrbot.api import logger, AstrBotConfig
-from astrbot.api.message_components import Plain, File as CompFile
+from astrbot.api.message_components import Plain, Record, Image as CompImage
 
 from .uapi_client import UAPIClient
 from .api_registry import API_DEFINITIONS, API_MAP
@@ -398,6 +398,7 @@ class UAPIPlugin(Star):
                     ext = e
                     break
 
+            tmp_path = None
             try:
                 with tempfile.NamedTemporaryFile(
                     delete=False, suffix=ext, dir=temp_dir
@@ -405,14 +406,22 @@ class UAPIPlugin(Star):
                     tmp.write(data)
                     tmp_path = tmp.name
 
+                # 使用 Record 组件代替 File，确保语音能内联播放
                 chain = [
-                    Plain("发音:"),
-                    CompFile(file=tmp_path, name=f"pronunciation{ext}"),
+                    Plain("🔊 "),
+                    Record.fromFileSystem(tmp_path),
                 ]
                 return event.chain_result(chain)
             except Exception as e:
                 logger.error(f"[UAPI] Failed to save audio: {e}")
                 return event.plain_result(f"音频获取成功，但发送失败: {str(e)}")
+            finally:
+                # 发送后清理临时文件
+                if tmp_path and os.path.exists(tmp_path):
+                    try:
+                        os.unlink(tmp_path)
+                    except OSError:
+                        pass
 
         if is_image:
             ext_map = {
@@ -429,6 +438,7 @@ class UAPIPlugin(Star):
                     ext = e
                     break
 
+            tmp_path = None
             try:
                 with tempfile.NamedTemporaryFile(
                     delete=False, suffix=ext, dir=temp_dir
@@ -440,6 +450,14 @@ class UAPIPlugin(Star):
             except Exception as e:
                 logger.error(f"[UAPI] Failed to save image: {e}")
                 return event.plain_result(f"图片获取成功，但发送失败: {str(e)}")
+            finally:
+                # image_result 是立即发送的，发送后可以清理
+                # 但由于 event.image_result 在 yield 后才发送，延迟一下再删
+                if tmp_path and os.path.exists(tmp_path):
+                    try:
+                        os.unlink(tmp_path)
+                    except OSError:
+                        pass
 
         return event.plain_result(
             f"API 调用成功（二进制数据，{len(data)} bytes，类型: {content_type}）"
@@ -600,8 +618,9 @@ def _make_tool_instance(api: dict, client: UAPIClient):
     """为一个 API 定义动态创建 FunctionTool 实例。"""
     from pydantic import Field
     from pydantic.dataclasses import dataclass
+    from astrbot.api import FunctionTool
     from astrbot.core.agent.run_context import ContextWrapper
-    from astrbot.core.agent.tool import FunctionTool, ToolExecResult
+    from astrbot.core.agent.tool import ToolExecResult
     from astrbot.core.astr_agent_context import AstrAgentContext
 
     api_name = api["short_name"]
