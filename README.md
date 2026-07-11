@@ -1,4 +1,4 @@
-![Moe Counter](https://count.getloli.com/@astrbot_plugin_uapi?theme=minecraft)
+![Moe Counter](https://count.getloli.com/@astrbot_plugin_uapi?theme=3d-num)
 
 
 # astrbot_plugin_uapi
