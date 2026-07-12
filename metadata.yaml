@@ -9,7 +9,7 @@ desc: |
   支持两种使用方式：
   1. 指令调用：通过 /uapi 指令直接调用任意 API
   2. LLM Tool：将全部可用 API（~90+个）注册为 LLM 可调用的 Function Tool
-author: GS-Nahida
+author: ナヒーダ
 version: 2.0.0
 support_platforms:
   - aiocqhttp
