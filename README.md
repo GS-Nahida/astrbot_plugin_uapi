@@ -1,6 +1,5 @@
 ![Moe Counter](https://count.getloli.com/@astrbot_plugin_uapi?theme=3d-num)
 
-
 # astrbot_plugin_uapi
 
 📡 封装 100+ 免费 API 的 AstrBot 插件，支持**指令调用**和 **LLM Tool 自动调用**两种方式。
@@ -23,7 +22,7 @@
 ### 方式二：手动安装
 
 ```bash
-cd AstrBot/data/plugins
+cd .../AstrBot/data/plugins # 替换为实际路径
 git clone https://github.com/GS-Nahida/astrbot_plugin_uapi
 ```
 
