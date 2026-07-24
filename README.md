@@ -45,6 +45,35 @@ pip install -r requirements.txt
 
 > 💡 **关于 API Key**：大部分 API 免费无需 Key。部分高级功能（如 AI 翻译、OCR）需要 Key。在 https://uapis.cn/console/api-keys 免费获取。
 
+## 🤖 LLM Tool 说明
+
+启用 `enable_tools` 后，插件会自动将以下类别的 API 注册为 LLM 可调用的 Function Tool：
+
+- 🌤️ 天气、农历、世界时间
+- 🌐 IP 查询、Ping、DNS、WHOIS
+- 🌍 文本翻译
+- 📊 全网热榜、智能搜索
+- 📱 B站、QQ、GitHub 信息查询
+- 🖼️ 二维码、必应壁纸
+- 📝 MD5、Base64、AES 加解密
+- 🎲 一言、答案之书、随机图片
+- 🎮 Minecraft、Steam、Epic
+- 📦 快递、手机归属地、电影票房
+
+在对话中，LLM 会根据用户意图自动调用合适的 API。例如：
+
+- 用户问"北京今天天气怎么样？" → 自动调用 `misc.weather`
+- 用户问"帮我查下 8.8.8.8 是哪里的 IP" → 自动调用 `network.ipinfo`
+- 用户问"帮我生成一个二维码链接到 example.com" → 自动调用 `image.qrcode`
+
+### 自定义 LLM Tool 白名单
+
+如果只想启用部分 API，在配置中填写 `tools_whitelist`（逗号分隔的 API 名称）：
+
+```
+misc.weather,network.ipinfo,translate.text,image.qrcode,misc.hotboard
+```
+
 ## 📖 指令用法
 
 ### 基本格式
@@ -315,35 +344,6 @@ pip install -r requirements.txt
 
 # 热榜
 /uapi misc.hotboard type=weibo
-```
-
-## 🤖 LLM Tool 说明
-
-启用 `enable_tools` 后，插件会自动将以下类别的 API 注册为 LLM 可调用的 Function Tool：
-
-- 🌤️ 天气、农历、世界时间
-- 🌐 IP 查询、Ping、DNS、WHOIS
-- 🌍 文本翻译
-- 📊 全网热榜、智能搜索
-- 📱 B站、QQ、GitHub 信息查询
-- 🖼️ 二维码、必应壁纸
-- 📝 MD5、Base64、AES 加解密
-- 🎲 一言、答案之书、随机图片
-- 🎮 Minecraft、Steam、Epic
-- 📦 快递、手机归属地、电影票房
-
-在对话中，LLM 会根据用户意图自动调用合适的 API。例如：
-
-- 用户问"北京今天天气怎么样？" → 自动调用 `misc.weather`
-- 用户问"帮我查下 8.8.8.8 是哪里的 IP" → 自动调用 `network.ipinfo`
-- 用户问"帮我生成一个二维码链接到 example.com" → 自动调用 `image.qrcode`
-
-### 自定义 LLM Tool 白名单
-
-如果只想启用部分 API，在配置中填写 `tools_whitelist`（逗号分隔的 API 名称）：
-
-```
-misc.weather,network.ipinfo,translate.text,image.qrcode,misc.hotboard
 ```
 
 ## 🏷️ 完整 API 列表
