@@ -49,7 +49,7 @@ pip install -r requirements.txt
 
 ### 基本格式
 
-```sh
+```
 /uapi <子命令> [参数...]
 ```
 
@@ -102,7 +102,7 @@ pip install -r requirements.txt
 
 ### 🌤️ 天气与生活
 
-```bash
+```
 # 查询天气
 /uapi misc.weather 北京
 
@@ -124,7 +124,7 @@ pip install -r requirements.txt
 
 ### 🌐 网络工具
 
-```bash
+```
 # IP 归属地查询
 /uapi network.ipinfo 8.8.8.8
 
@@ -149,7 +149,7 @@ pip install -r requirements.txt
 
 ### 🌍 翻译
 
-```bash
+```
 # 文本翻译（中译英）
 /uapi translate.text en 你好世界
 
@@ -162,7 +162,7 @@ pip install -r requirements.txt
 
 ### 📊 热榜与搜索
 
-```bash
+```
 # 微博热搜
 /uapi misc.hotboard weibo
 
@@ -178,7 +178,7 @@ pip install -r requirements.txt
 
 ### 📱 社交媒体
 
-```bash
+```
 # B站视频信息
 /uapi social.bilibili.videoinfo BV17x411w79F
 
@@ -203,7 +203,7 @@ pip install -r requirements.txt
 
 ### 🖼️ 图片工具（自动发送图片）
 
-```bash
+```
 # 生成二维码
 /uapi image.qrcode https://example.com 512
 
@@ -222,7 +222,7 @@ pip install -r requirements.txt
 
 ### 📝 文本处理
 
-```bash
+```
 # MD5 哈希
 /uapi text.md5 "hello world"
 
@@ -235,7 +235,7 @@ pip install -r requirements.txt
 
 ### 🎮 游戏相关
 
-```bash
+```
 # Minecraft 服务器状态
 /uapi game.minecraft.serverstatus hypixel.net
 
@@ -251,7 +251,7 @@ pip install -r requirements.txt
 
 ### 🎲 随机与娱乐
 
-```bash
+```
 # 一言（随机）
 /uapi saying.random
 
@@ -270,7 +270,7 @@ pip install -r requirements.txt
 
 ### 📦 实用工具
 
-```bash
+```
 # 手机归属地
 /uapi misc.phoneinfo 13800138000
 
@@ -300,7 +300,7 @@ pip install -r requirements.txt
 
 如果更喜欢指定参数名，传统 `key=value` 模式仍完全支持：
 
-```bash
+```
 # 查询天气
 /uapi misc.weather city=北京
 
