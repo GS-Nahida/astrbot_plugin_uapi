@@ -13,25 +13,6 @@
 - ⚙️ **可视化配置**：在 WebUI 中配置 API Key、启用/禁用 Tool、自定义 Tool 白名单
 - 🔍 **搜索与浏览**：支持 API 列表分页、关键词搜索、模糊匹配
 
-## 📦 安装
-
-### 方式一：AstrBot WebUI 插件市场
-
-在 WebUI 的插件管理页面搜索 `astrbot_plugin_uapi` 并安装。
-
-### 方式二：手动安装
-
-```bash
-cd .../AstrBot/data/plugins # 替换为实际路径
-git clone https://github.com/GS-Nahida/astrbot_plugin_uapi
-```
-
-安装依赖：
-
-```bash
-pip install -r requirements.txt
-```
-
 ## ⚙️ 配置说明
 
 在 AstrBot WebUI 插件管理页面，点击插件右侧的配置按钮：
